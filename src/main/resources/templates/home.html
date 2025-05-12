@@ -6,6 +6,65 @@
 <body>
     <h1>Welcome to Thymeleaf</h1>
 
+    <b>1. Input default value</b>
     <input id="defaultName" type="text" name="userName" value="James Carrot" th:value="${defaultValue}">
+    <br>
+    <b>2. Variable expression ${...}}</b>
+    <p th:text="${greetings}">Nothing</p>
+    <br>
+    <b>3. Example with object EmployeeDto</b>
+    <p th:text="${employee.firstName}">Nothing 1</p>
+    <p th:text="${employee.getFullName()}">Nothing 2</p>
+    <p th:text="${employee['lastName']}">Nothing 3</p>
+    <br>
+    <b>4. Map</b>
+    <p th:text="${employeeDtoMap['Ivan'].email}">Nothing 1</p>
+    <p th:text="${employeeDtoMap.Ivan.email}">Nothing 2</p>
+    <br>
+    <b>4. List</b>
+    <p th:text="${employeeDtoList[1].email}"></p>
+    <br>
+    <b>6. Asterisk syntax *{...}</b>
+    <div th:object="${employeeObj}">
+        <div>
+            <label for="firstName">First name:</label>
+            <span id="firstName" style="color: blue" th:text="*{firstName}"></span>
+        </div>
+        <div>
+            <label for="lastName">Last name:</label>
+            <span id="lastName" style="color: blue" th:text="*{lastName}"></span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <span id="email" style="color: blue" th:text="*{email}"></span>
+        </div>
+    </div>
+    <br>
+    <b>7. Link Expression @{...}</b>
+    <br>
+    <a th:href="@{http://localhost:8080/info}">absolute link</a>
+    <br>
+    <a id="relativeLink" th:href="@{/info}">relative link</a>
+    <br>
+    <!--http://localhost:8080/info/parget?status=testme-->
+    <a id="relativeLinkWithExpression" th:href="@{/info/parget(status=${'testme'})}">relative link with expression</a>
+    <br>
+    <!--http://localhost:8080/info/parget?status=isOkMe&position=center-->
+    <a id="relativeLinkWithExpression2" th:href="@{/info/parget(status=${test}, position=${'center'})}">relative link with expression with 2 args</a>
+    <br>
+    <a id="relPathLink" th:href="@{/info/{path}/some(path=${'dynamic'})}">link with param in path</a>
+    <br>
+
+    <b>8. Message Expression</b>
+    <!--
+    Произойдет экранирование и выведится:
+    ??home.welcome_ru??
+    -->
+    <p th:text="#{home.welcome}">You are seen default message!</p>
+    <br>
+    <p th:utext="#{home.welcome.tag}">You are seen default message!</p>
+    <br>
+
+
 </body>
 </html>
