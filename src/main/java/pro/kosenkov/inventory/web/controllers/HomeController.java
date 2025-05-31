@@ -3,6 +3,7 @@ package pro.kosenkov.inventory.web.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import pro.kosenkov.inventory.web.dto.AccessRole;
 import pro.kosenkov.inventory.web.dto.EmployeeDto;
 import pro.kosenkov.inventory.web.dto.Gender;
 
@@ -25,6 +26,7 @@ public class HomeController {
                 .lastName("Kenney")
                 .email("ivan.kenney@gmail.com")
                 .gender(Gender.MALE)
+                .role(AccessRole.ADMIN)
                 .build();
 
         model.addAttribute("employee", employeeDto1);
@@ -34,6 +36,7 @@ public class HomeController {
                 .lastName("Vallevsky")
                 .email("a.val@gmail.com")
                 .gender(Gender.MALE)
+                .role(AccessRole.USER)
                 .build();
 
         EmployeeDto employeeDto3 = EmployeeDto.builder()
@@ -41,6 +44,7 @@ public class HomeController {
                 .lastName("Petrovich")
                 .email("anna.petr@gmail.com")
                 .gender(Gender.FEMALE)
+                .role(AccessRole.MODERATOR)
                 .build();
 
         Map<String, EmployeeDto> employeeDtoMap = new HashMap<>();
@@ -60,6 +64,9 @@ public class HomeController {
 
         // 7. Links
         model.addAttribute("test", "isOkMe");
+
+        // 13. IF
+
 
         return "home";
     }

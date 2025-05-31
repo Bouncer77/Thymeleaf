@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Thymeleaf Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery если используешь -->
+    <script src="/js/app/index.js"></script>
 </head>
 <body>
     <h1>Welcome to Thymeleaf</h1>
@@ -114,7 +116,7 @@
     </div>
 
     <br>
-    <b>Cycle FOR with index</b>
+    <b>12. Cycle FOR with index</b>
     <br>
     <div class="container">
         <div class="row">
@@ -131,13 +133,53 @@
     </div>
 
     <br>
-    <b>IF</b>
+    <b>13. IF</b>
     <br>
     <div class="container">
-        <div class="row" th:if="${employeeDtoList.get(0)}">
+        <!--Admin-->
+        <div class="row" th:if="${employeeDtoList.get(0).isAdmin()}">
+            <label style="margin-right: 1.5em" for="thif"> th:if </label>
+            <p id="thif" th:text="${employeeDtoList.get(0).isAdmin()}"></p>
+        </div>
 
+        <!--не отобразится, т.к. user_id = 0 это админ, а условие unless-->
+        <div class="row" th:unless="${employeeDtoList.get(0).isAdmin()}">
+            <label style="margin-right: 1.5em" for="thunless1"> th:if </label>
+            <p id="thunless1" th:text="${employeeDtoList.get(0).isAdmin()}"></p>
+        </div>
+
+        <!--User-->
+        <div class="row" th:unless="${employeeDtoList.get(1).isAdmin()}">
+            <label style="margin-right: 1.5em" for="thunless"> th:if </label>
+            <p id="thunless" th:text="${employeeDtoList.get(1).isAdmin()}"></p>
         </div>
     </div>
+
+    <br>
+    <b>14. Switch</b>
+    <br>
+    <div class="container">
+        <div class="row">
+            <label for="thswitch" style="margin-right: 1.5em"> th:switch</label>
+            <div style="color: green" id="thswitch" th:switch="${employeeDtoList.get(0).getGender().toString()}">
+                <p th:case="'MALE'"> Employee is man </p>
+                <p th:case="'FAMALE'"> Employee is woman </p>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <b>15. Onclick</b>
+    <br>
+    <div class="row">
+        <label style="margin-right: 1.5em" for="thonclick"> th:onclick</label>
+        <button class="btn btn-info" id="thonclick"
+                th:onclick="|substituteOnClick('ONCLICK EXAMPLE');|">
+            Click
+        </button>
+    </div>
+
+
 
 </body>
 </html>
