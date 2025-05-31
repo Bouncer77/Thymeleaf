@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Thymeleaf Example</title>
 </head>
@@ -60,11 +60,84 @@
     Произойдет экранирование и выведится:
     ??home.welcome_ru??
     -->
+    <!--Выводит текст как есть-->
     <p th:text="#{home.welcome}">You are seen default message!</p>
     <br>
+    <!--Применяет тэги HTML в тексте-->
     <p th:utext="#{home.welcome.tag}">You are seen default message!</p>
     <br>
 
+    <b>9. Fragment Expression ~(...)</b>
+    <!--<div class="row" th:insert="~{templates/index :: footer(true)}"></div>-->
+
+    <b>10. Literals</b>
+    <div class="container">
+        <p>Text operators</p>
+        <span th:text="${'some text concat to' + 'another text'}"></span>
+        <span th:text="|10|"></span>
+    </div>
+
+    <br>
+    <div class="container">
+        <p>Comparisons and equality</p>
+        <span th:text="${5 > 3}"></span>
+        <span th:text="${6 gt 9}"></span>
+        <span th:text="${3 == 3}"></span>
+    </div>
+
+    <br>
+    <b>11. Attributes</b>
+    <label for="thatter">th:atter : </label>
+    <input id="thatter" th:attr="value=${defaultName}"/>
+    <br>
+    <label for="thatter2">th:atter :</label>
+    <input id="thatter2" th:attr="value=${defaultName}, style='color: blue'"/>
+
+    <br>
+    <label for="attrappend">th:atterappend</label>
+    <input id="attrappend" type="button" value="Do it!" class="btn" th:attrappend="class=${' ' + 'btn-success'}"/>
+
+    <br>
+    <b>Cycle FOR</b>
+    <div class="container">
+        <div class="row">
+            <label style="margin-right: 1.5em" for="each">th:each : </label>
+            <table style="color: green" id="each">
+                <tr th:each="employee : ${employeeDtoList}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.isMan()}"></td>
+                    <!--<td th:text="${index}"></td>-->
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <b>Cycle FOR with index</b>
+    <br>
+    <div class="container">
+        <div class="row">
+            <label style="margin-right: 1.5em" for="each2">th:each : </label>
+            <table style="color: green" id="each2">
+                <tr th:each="employee, index : ${employeeDtoList}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.isMan()}"></td>
+                    <td th:text="${index}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <b>IF</b>
+    <br>
+    <div class="container">
+        <div class="row" th:if="${employeeDtoList.get(0)}">
+
+        </div>
+    </div>
 
 </body>
 </html>

@@ -16,6 +16,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
+        model.addAttribute("defaultName", "defName");
         model.addAttribute("defaultValue", "Ivan");
         model.addAttribute("greetings", "Hello Word!");
 
