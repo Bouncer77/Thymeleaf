@@ -179,7 +179,17 @@
         </button>
     </div>
 
-
+    <br>
+    <b>16. Block</b>
+    <br>
+    <th:block th:if="${employeeDtoList.size() > 1}">
+        <div class="container">
+            <label style="margin-right: 2em" for="thblock"> th:block : </label>
+            <th:block th:each="em : ${employeeDtoList}">
+                <span id="thblock" style="color: green; margin-right: 2em" th:text="${em.getFullName()}"> span </span>
+            </th:block>
+        </div>
+    </th:block>
 
 </body>
 </html>
